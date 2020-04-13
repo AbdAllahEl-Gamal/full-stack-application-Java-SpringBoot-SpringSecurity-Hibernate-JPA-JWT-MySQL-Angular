@@ -1,0 +1,33 @@
+.user-container {
+    width: 90%;
+    margin: 20px auto;
+
+    .user-table {
+        font-family: 'Montserrat';
+        border-collapse: collapse;
+        width: 100%;
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background: rgb(1, 29, 51);
+            color: white;
+        }
+
+        tr {  
+            &:hover {
+                background-color: #ddd;
+            }
+
+            &:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        }   
+    }
+}

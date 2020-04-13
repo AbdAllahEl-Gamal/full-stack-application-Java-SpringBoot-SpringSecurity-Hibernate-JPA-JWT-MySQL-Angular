@@ -1,0 +1,87 @@
+.my-container {
+    background: #011d33;
+    height: 100%;
+
+    .login {
+        display: table;
+        width: 400px;
+        height: 100%;
+        margin: 0 auto;
+        font-size: 16px;
+        
+        img {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: table-cell;
+            vertical-align: middle;
+            background: #ebebeb;
+            padding: 12px;
+
+            label {
+                display: block;
+                
+                input {
+                    box-sizing: border-box;
+                    display: block;
+                    width: 100%;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 16px;
+                    outline: 0;
+                    font-family: inherit;
+                    font-size: 0.95em;
+                    margin-bottom: 15px;
+                }
+            
+                .error {
+                    margin-top: -20px;
+                    padding: .5em;
+                    display: inline-block;
+                    font-size: .9em;
+                    color: rgb(230, 14, 14);
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+            }
+
+            .not-reg-par {
+                color: rgb(1, 29, 51);
+                font-size: .9em;
+                text-align: center;
+                a {
+                    font-weight: bold;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:hover, &:focus, &:visited, &:link {
+                        text-decoration: none;
+                        color: rgb(1, 29, 51);
+                    }
+                }               
+            }
+        }
+
+        .login-button {
+            background: rgb(1, 29, 51);
+            border-color: transparent;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Montserrat';
+            width: 100%;
+            padding: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            &:hover, &:focus {
+                background: rgb(1, 29, 51);
+                border-color: none;
+                outline: none;
+            }
+        }
+    }
+}

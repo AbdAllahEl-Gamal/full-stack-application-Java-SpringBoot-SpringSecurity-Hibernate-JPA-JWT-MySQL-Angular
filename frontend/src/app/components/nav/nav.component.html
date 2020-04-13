@@ -1,0 +1,11 @@
+<header>
+    <div class="container">
+        <a class="logo">Welcome {{ userName }}</a>
+        <nav>
+            <ul>
+                <li><a routerLink="/home">Home</a></li>
+                <li><a (click)="logout()" routerLink="/login">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
