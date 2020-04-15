@@ -71,9 +71,9 @@
     	</dependency>
     	<!-- For Freemarker Templates -->
     	<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 		<!-- For Lombok -->
 		<!--
 		<dependency>

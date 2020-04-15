@@ -19,6 +19,10 @@ public class EmailConfirmationToken {
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
+    
+    public EmailConfirmationToken() {
+
+    }
 
     public EmailConfirmationToken(User user) {
         this.user = user;
