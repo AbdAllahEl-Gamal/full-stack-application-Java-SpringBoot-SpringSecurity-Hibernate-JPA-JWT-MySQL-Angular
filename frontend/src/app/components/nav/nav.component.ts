@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from  '../../services/auth/auth.service';
+import { TokenStorageService } from  '../../services/auth/token-storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,17 +7,28 @@ import { AuthService } from  '../../services/auth/auth.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  private roles: string[];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  username: string;
 
-  userName = '';
-
-  constructor(private authService: AuthService) { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
-    this.userName = sessionStorage.getItem('loggedUser');
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+
+      this.username = user.username;
+    }
   }
 
   logout() {
-    return this.authService.logout();
+    this.tokenStorageService.logout();
+    window.location.reload();
   }
-
 }

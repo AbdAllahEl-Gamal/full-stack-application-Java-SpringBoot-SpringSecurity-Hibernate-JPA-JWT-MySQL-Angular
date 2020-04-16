@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/index";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from "rxjs";
+
 import { ApiResponse } from "../../interfaces/api.response";
-import { JwtAuthenticationResponse } from "../../interfaces/jwt.authentication.response";
 import { User } from '../../interfaces/user';
 
 @Injectable({
@@ -14,19 +14,23 @@ export class AuthService {
 
   baseUrl: string = 'http://localhost:5000/api/auth';
 
-  login(loginPayload): Observable<JwtAuthenticationResponse> {
-    return this.httpClient.post<JwtAuthenticationResponse>(`${this.baseUrl}/signin`, loginPayload);
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  login(loginPayload): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/signin`, {
+      usernameOrEmail: loginPayload.username,
+      password: loginPayload.password
+    }, this.httpOptions);
   }
 
-  registration(user: User): Observable<ApiResponse> {
-    return this.httpClient.post<ApiResponse>(`${this.baseUrl}/signup`, user);
-  } 
-
-  public isLoggedIn() {
-    return sessionStorage.getItem('token') !== null;
-  }
-
-  public logout() {
-    sessionStorage.removeItem('token');
+  registration(user: User): Observable<any> {
+    return this.httpClient.post<ApiResponse>(`${this.baseUrl}/signup`, {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      password: user.password
+    }, this.httpOptions);
   }
 }

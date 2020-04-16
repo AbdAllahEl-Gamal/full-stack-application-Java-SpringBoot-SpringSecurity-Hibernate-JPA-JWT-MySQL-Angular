@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from  '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { User } from '../../interfaces/user';
 import { AuthService } from  '../../services/auth/auth.service';
 
@@ -12,8 +13,11 @@ import { AuthService } from  '../../services/auth/auth.service';
 export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
-  user: User = new User();
   isSubmitted = false;
+  isFailed = false;
+  errorMessage = '';
+
+  user: User = new User();
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
@@ -30,15 +34,17 @@ export class RegistrationComponent implements OnInit {
     return this.registrationForm.controls; 
   }
 
-  save() {
-    this.authService.registration(this.registrationForm.value)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.user = new User();
-  }
-
   registrationSubmit() {
-    this.isSubmitted = true;
-    this.save();
+    this.authService.registration(this.registrationForm.value).subscribe(
+      data => {
+        console.log(data);
+        this.isSubmitted = true;
+        this.isFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isFailed = true;
+      }
+    );
   }
-
 }
