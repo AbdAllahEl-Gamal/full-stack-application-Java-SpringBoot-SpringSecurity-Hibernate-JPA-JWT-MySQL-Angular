@@ -1,38 +1,39 @@
 <div class="my-container">
     <div class="registration">
       <form [formGroup]="registrationForm" (ngSubmit)="registrationSubmit()">
-    
-          <label>
-            <input type="text" placeholder="Name" formControlName="name" id="name" name="name">
-            <div *ngIf="isSubmitted && formControls.name.errors" class="error">
-              <div *ngIf="formControls.name.errors.required">Your name is required</div>
-            </div>
-          </label>
+        <img src="../../../assets/images/angular-springboot-logo.png" alt="">
 
-          <label>
-            <input type="text" placeholder="Username" formControlName="username" id="username" name="username">
-            <div *ngIf="isSubmitted && formControls.username.errors" class="error">
-              <div *ngIf="formControls.username.errors.required">Your username is required</div>
-            </div>
-          </label>
+        <label>
+          <input type="text" placeholder="Name" formControlName="name" id="name" name="name" autocomplete="off">
+          <div *ngIf="isSubmitted && formControls.name.errors" class="error">
+            <div *ngIf="formControls.name.errors.required">Your name is required</div>
+          </div>
+        </label>
 
-          <label>
-            <input type="email" placeholder="Email" formControlName="email" id="email" name="email">
-            <div *ngIf="isSubmitted && formControls.email.errors" class="error">
-              <div *ngIf="formControls.email.errors.required">Your email is required</div>
-            </div>
-          </label>
-        
-          <label>
-            <input type="password" placeholder="Password" formControlName="password" id="password" name="password">
-            <div *ngIf="isSubmitted && formControls.password.errors" class="error">
-              <div *ngIf="formControls.password.errors.required">Your password is required</div>
-            </div>
-          </label>
-    
-          <p class="have-acc-par">Already have an account? <a routerLink="/login">Login</a></p>
-    
-          <input type="submit" value="Submit" class="register-button">
+        <label>
+          <input type="text" placeholder="Username" formControlName="username" id="username" name="username" autocomplete="off">
+          <div *ngIf="isSubmitted && formControls.username.errors" class="error">
+            <div *ngIf="formControls.username.errors.required">Your username is required</div>
+          </div>
+        </label>
+
+        <label>
+          <input type="email" placeholder="Email" formControlName="email" id="email" name="email" autocomplete="off">
+          <div *ngIf="isSubmitted && formControls.email.errors" class="error">
+            <div *ngIf="formControls.email.errors.required">Your email is required</div>
+          </div>
+        </label>
+      
+        <label>
+          <input type="password" placeholder="Password" formControlName="password" id="password" name="password" autocomplete="off">
+          <div *ngIf="isSubmitted && formControls.password.errors" class="error">
+            <div *ngIf="formControls.password.errors.required">Your password is required</div>
+          </div>
+        </label>
+  
+        <p class="have-acc-par">Already have an account? <a routerLink="/login">Login</a></p>
+  
+        <input type="submit" value="Submit" class="register-button">
         
       </form>
     </div>
