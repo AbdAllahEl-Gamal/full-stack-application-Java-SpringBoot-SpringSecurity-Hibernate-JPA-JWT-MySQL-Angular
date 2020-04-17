@@ -44,7 +44,7 @@ public class User extends DateAudit {
     
     private boolean isEnabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -108,8 +108,8 @@ public class User extends DateAudit {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-	public boolean isEnabled() {
+    
+	public boolean getEnabled() {
 		return isEnabled;
 	}
 
