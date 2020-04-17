@@ -4,7 +4,7 @@
         <img src="../../../assets/images/angular-logo.png" alt="">
 
         <label>
-          <input type="text" placeholder="Username" formControlName="username" id="usernameOrEmail" autocomplete="off">
+          <input type="text" placeholder="Username or Email" formControlName="username" id="usernameOrEmail" autocomplete="off">
           <div *ngIf="isSubmitted && formControls.username.errors" class="error">
             <div *ngIf="formControls.username.errors.required">Your username is required</div>
           </div>
@@ -20,6 +20,10 @@
         <p class="not-reg-par">Not registered yet? <a routerLink="/registration">Register</a></p>
 
         <input type="submit" value="Login" class="login-button">
+
+        <div class="forgot-password-div">
+          <a class="forgot-password-anchor" routerLink="/forgot-password">Forgot password?</a>
+        </div>
       
     </form>
   </div>

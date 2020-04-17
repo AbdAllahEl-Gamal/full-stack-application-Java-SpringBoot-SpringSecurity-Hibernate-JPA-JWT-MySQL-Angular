@@ -12,6 +12,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -27,7 +28,8 @@ import { authInterceptorProviders } from './guards/interceptor/interceptor';
     RegistrationComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login'},
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'user', component: BoardUserComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard] },

@@ -17,8 +17,6 @@ export class RegistrationComponent implements OnInit {
   isFailed = false;
   errorMessage = '';
 
-  user: User = new User();
-
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
