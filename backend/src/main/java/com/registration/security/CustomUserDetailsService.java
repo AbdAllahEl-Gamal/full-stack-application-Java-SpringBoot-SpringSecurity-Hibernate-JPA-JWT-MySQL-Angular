@@ -1,5 +1,6 @@
 package com.registration.security;
 
+import com.registration.exception.AppException;
 import com.registration.model.User;
 import com.registration.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail)
                 );
+        
+        if(user.getEnabled() == false) {
+        	System.out.println("This account hasn't been activated yet.");
+    		throw new AppException("This account hasn't been activated yet.");
+    	}
 
         return UserPrincipal.create(user);
     }
