@@ -121,11 +121,16 @@ public class AuthController {
         emailConfirmationTokenRepository.save(emailConfirmationToken);
         
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+		
+//		Map model = new HashMap();
         
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("abdallah.algamal93@gmail.com");
-        mailMessage.setText("To confirm your account, please click here : "
+//		model.put("emailConfirmationToken", emailConfirmationToken.getConfirmationToken());
+//		mailMessage.setModel(model);
+        
+		mailMessage.setText("To confirm your account, please click here: "
         +"http://localhost:5000/api/auth/confirm-account?token="+emailConfirmationToken.getConfirmationToken());
 
         emailSenderService.sendEmail(mailMessage);
