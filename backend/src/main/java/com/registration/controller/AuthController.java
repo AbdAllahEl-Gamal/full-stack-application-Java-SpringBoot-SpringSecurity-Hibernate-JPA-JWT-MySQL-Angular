@@ -70,11 +70,17 @@ public class AuthController {
     	    	
     	Optional<User> user = userRepository.findByUsernameOrEmail(loginRequest.getUsernameOrEmail(), loginRequest.getUsernameOrEmail());
     	
+    	user.ifPresent(value -> {
+    	    System.out.println("Value found - " + value);
+    	});
+    	
     	System.out.println("user is " + user);
     	System.out.println("user.getEnabled() " + user.get().getEnabled());
     	
-    	if(user.get().getEnabled() == false) {
-    		throw new AppException("This account hasn't been activated yet.");
+    	if(user.isPresent()) {
+    		if(user.get().getEnabled() == false) {
+        		throw new AppException("This account hasn't been activated yet.");
+        	}
     	}
     	
         Authentication authentication = authenticationManager.authenticate(
