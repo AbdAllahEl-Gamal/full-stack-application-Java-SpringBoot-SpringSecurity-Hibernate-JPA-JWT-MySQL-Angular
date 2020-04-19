@@ -33,4 +33,8 @@ export class AuthService {
       password: user.password
     }, this.httpOptions);
   }
+
+  forgotPassword(user: User): Observable<any> {
+    return this.httpClient.post<ApiResponse>(`${this.baseUrl}/forgot-password?email=${user.email}`, this.httpOptions);
+  }
 }

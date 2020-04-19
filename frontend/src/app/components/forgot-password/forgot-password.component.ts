@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from  '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from  '../../services/auth/auth.service';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -14,7 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
   isFailed = false;
   errorMessage = '';
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.forgotPasswordForm = this.formBuilder.group({
@@ -27,6 +29,18 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   forgotPasswordSubmit() {
+    console.log(this.forgotPasswordForm.value.email);
     this.isSubmitted = true;
+    this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe(
+      data => {
+        console.log(this.forgotPasswordForm.value);
+        console.log(data);
+        this.isFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isFailed = true;
+      }
+    );
   }
 }
