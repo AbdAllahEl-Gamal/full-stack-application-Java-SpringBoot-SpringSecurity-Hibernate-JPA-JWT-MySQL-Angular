@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmit() {
+    this.isSubmitted = true;
     this.authService.login(this.loginForm.value).subscribe(
       data => {
         this.tokenStorageService.saveToken(data.accessToken);
         this.tokenStorageService.saveUser(data);
 
         this.isFailed = false;
-        this.isSubmitted = true;
         this.roles = this.tokenStorageService.getUser().roles;
         this.router.navigateByUrl('/home');
       },

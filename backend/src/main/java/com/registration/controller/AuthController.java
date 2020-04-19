@@ -37,7 +37,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
-import java.util.Optional;
 
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -108,21 +107,15 @@ public class AuthController {
         User result = userRepository.save(user);
         
         EmailConfirmationToken emailConfirmationToken = new EmailConfirmationToken(user);
-        
         emailConfirmationTokenRepository.save(emailConfirmationToken);
         
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
-//		Map model = new HashMap();
         
         mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("abdallah.algamal93@gmail.com");
-//		model.put("emailConfirmationToken", emailConfirmationToken.getConfirmationToken());
-//		mailMessage.setModel(model);
-        
+        mailMessage.setSubject("Complete Registration!");
 		mailMessage.setText("To confirm your account, please click here: "
-        +"http://localhost:5000/api/auth/confirm-account?token="+emailConfirmationToken.getConfirmationToken());
+        + "http://localhost:5000/api/auth/confirm-account?token=" + emailConfirmationToken.getConfirmationToken());
 
         emailSenderService.sendEmail(mailMessage);
 

@@ -33,10 +33,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   registrationSubmit() {
+    this.isSubmitted = true;
     this.authService.registration(this.registrationForm.value).subscribe(
       data => {
         console.log(data);
-        this.isSubmitted = true;
         this.isFailed = false;
       },
       err => {
