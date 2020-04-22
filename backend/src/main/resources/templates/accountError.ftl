@@ -2,6 +2,12 @@
   xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Error!</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<style>
+			body {
+				font-family: 'Montserrat', sans-serif;
+			}
+		</style>
     </head>
 	<body style="font-size: 18px; background: #011d33; height: 100%; margin: 0 auto; padding: 0px;">
 		<div class="template-container" style="display: table; width: 400px; height: 100%; margin: 0 auto;">
