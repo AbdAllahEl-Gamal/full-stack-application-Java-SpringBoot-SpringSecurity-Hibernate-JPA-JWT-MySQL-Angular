@@ -149,7 +149,7 @@ public class AuthController {
     }
     
     @PostMapping("/forgot-password")
-    public ModelAndView forgotUserPassword(ModelAndView modelAndView, User user) {
+    public ResponseEntity<?> forgotUserPassword(ModelAndView modelAndView, User user) {
    
     	User existingUser = userRepository.findByEmail(user.getEmail());
     	
@@ -169,16 +169,12 @@ public class AuthController {
             mailMessage.setText("Dear,\r\n\r\nPlease click on the link below to complete the password reset process.\r\n\r\n"
               + "http://localhost:5000/api/auth/confirm-reset?token=" + emailConfirmationToken.getConfirmationToken());
 
-            // Send the email
             emailSenderService.sendEmail(mailMessage);
 
-            modelAndView.addObject("message", "Request to reset password received. Check your inbox for the reset link.");
-
         } else {
-            modelAndView.addObject("message", "This email address does not exist!");
-            modelAndView.setViewName("error");
+            System.out.println("This email address does not exist!");
         }
-        return modelAndView;
+    	return ResponseEntity.ok("Check your mail to change your password");
     }
     
     @RequestMapping(value="/confirm-reset", method= {RequestMethod.GET, RequestMethod.POST})
@@ -188,7 +184,6 @@ public class AuthController {
 
         if (token != null) {
             User user = userRepository.findByEmail(token.getUser().getEmail());
-            user.setEnabled(true);
             userRepository.save(user);
             modelAndView.addObject("user", user);
             modelAndView.addObject("email", user.getEmail());
@@ -201,9 +196,10 @@ public class AuthController {
         return modelAndView;
     }
     
-    @RequestMapping(value = "/reset-password", method = RequestMethod.POST)
+    @PostMapping("/reset-password")
     public ModelAndView resetUserPassword(ModelAndView modelAndView, User user) {
     	System.out.println(user.getEmail());
+    	System.out.println("Password is " + user.getPassword());
     	if (user.getEmail() != null) {
             // Use email to find user
             User tokenUser = userRepository.findByEmail(user.getEmail());
