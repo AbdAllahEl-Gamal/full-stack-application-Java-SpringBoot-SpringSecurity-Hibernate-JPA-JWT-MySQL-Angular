@@ -109,14 +109,15 @@ public class AuthController {
         
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         
+        URI tokenURI = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/auth/confirm-account").query("token={emailConfirmationToken}").buildAndExpand(emailConfirmationToken.getConfirmationToken()).toUri();
+        
         mailMessage.setTo(user.getEmail());
         mailMessage.setFrom("abdallah.algamal93@gmail.com");
         mailMessage.setSubject("Complete Registration!");
-		mailMessage.setText("Dear,\r\n" + user.getName()+ "\r\n\r\nPlease click on the link below to confirm your account.\r\n\r\n"
-        + "http://localhost:5000/api/auth/confirm-account?token=" + emailConfirmationToken.getConfirmationToken());
+		mailMessage.setText("Hi,\r\n" + user.getName() + "\r\n\r\nPlease click on the link below to confirm your account.\r\n\r\n" + tokenURI);
 
         emailSenderService.sendEmail(mailMessage);
-
+        
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
@@ -161,16 +162,18 @@ public class AuthController {
 
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             
+            URI tokenURI = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/auth/confirm-reset").query("token={emailConfirmationToken}").buildAndExpand(emailConfirmationToken.getConfirmationToken()).toUri();
+            
             mailMessage.setTo(existingUser.getEmail());
             mailMessage.setFrom("abdallah.algamal93@gmail.com");
             mailMessage.setSubject("Complete Password Reset!");
-            mailMessage.setText("Dear,\r\n\r\nPlease click on the link below to complete the password reset process.\r\n\r\n"
-              + "http://localhost:5000/api/auth/confirm-reset?token=" + emailConfirmationToken.getConfirmationToken());
+            mailMessage.setText("Hi,\r\n\r\nPlease click on the link below to complete the password reset process.\r\n\r\n" + tokenURI);
 
             emailSenderService.sendEmail(mailMessage);
 
         } else {
-            System.out.println("This email address does not exist!");
+        	return new ResponseEntity(new ApiResponse(false, "This email address does not exist!"),
+                    HttpStatus.NO_CONTENT);
         }
     	return ResponseEntity.ok("Check your mail to change your password");
     }

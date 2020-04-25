@@ -1,11 +1,16 @@
 package com.application.model;
 
 import javax.persistence.*;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 public class EmailConfirmationToken {
+	
+	private static final double EXPIRATION = 0.1 * 24;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +24,15 @@ public class EmailConfirmationToken {
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
+    
+    private Date expiryDate;
+
+	private Date calculateExpiryDate(int expiryTimeInMinutes) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
+    }
     
     public EmailConfirmationToken() {
 
@@ -60,5 +74,13 @@ public class EmailConfirmationToken {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+    public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 }
