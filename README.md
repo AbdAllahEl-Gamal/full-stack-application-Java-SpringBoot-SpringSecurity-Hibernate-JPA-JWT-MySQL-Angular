@@ -12,6 +12,6 @@ Tools and technologies:
 
 - MySQL relational database management system.  
 
-- AngularJS frontend JavaScript framework.
+- Angular 9 frontend JavaScript framework.
 
 - Thymeleaf template engine.
